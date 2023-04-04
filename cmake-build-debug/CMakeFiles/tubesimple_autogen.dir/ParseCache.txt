@@ -102,6 +102,7 @@
  mdp:/usr/include/c++/12.2.1/bits/hash_bytes.h
  mdp:/usr/include/c++/12.2.1/bits/invoke.h
  mdp:/usr/include/c++/12.2.1/bits/ios_base.h
+ mdp:/usr/include/c++/12.2.1/bits/istream.tcc
  mdp:/usr/include/c++/12.2.1/bits/iterator_concepts.h
  mdp:/usr/include/c++/12.2.1/bits/list.tcc
  mdp:/usr/include/c++/12.2.1/bits/locale_classes.h
@@ -192,6 +193,8 @@
  mdp:/usr/include/c++/12.2.1/initializer_list
  mdp:/usr/include/c++/12.2.1/ios
  mdp:/usr/include/c++/12.2.1/iosfwd
+ mdp:/usr/include/c++/12.2.1/iostream
+ mdp:/usr/include/c++/12.2.1/istream
  mdp:/usr/include/c++/12.2.1/iterator
  mdp:/usr/include/c++/12.2.1/limits
  mdp:/usr/include/c++/12.2.1/list
@@ -341,8 +344,10 @@
  mdp:/usr/include/qt/QtWidgets/QApplication
  mdp:/usr/include/qt/QtWidgets/QComboBox
  mdp:/usr/include/qt/QtWidgets/QDesktopWidget
+ mdp:/usr/include/qt/QtWidgets/QFormLayout
  mdp:/usr/include/qt/QtWidgets/QHBoxLayout
  mdp:/usr/include/qt/QtWidgets/QLabel
+ mdp:/usr/include/qt/QtWidgets/QLayout
  mdp:/usr/include/qt/QtWidgets/QLineEdit
  mdp:/usr/include/qt/QtWidgets/QPushButton
  mdp:/usr/include/qt/QtWidgets/QShortcut
@@ -355,6 +360,7 @@
  mdp:/usr/include/qt/QtWidgets/qboxlayout.h
  mdp:/usr/include/qt/QtWidgets/qcombobox.h
  mdp:/usr/include/qt/QtWidgets/qdesktopwidget.h
+ mdp:/usr/include/qt/QtWidgets/qformlayout.h
  mdp:/usr/include/qt/QtWidgets/qframe.h
  mdp:/usr/include/qt/QtWidgets/qgridlayout.h
  mdp:/usr/include/qt/QtWidgets/qlabel.h

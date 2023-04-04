@@ -17,6 +17,9 @@
 #include <QIcon>
 #include <QPixmap>
 #include <QDesktopWidget>
+#include <QFormLayout>
+
+#include <iostream>
 
 
 class tubesimple : public QWidget {
@@ -34,10 +37,19 @@ private:
     QLineEdit longueur;
     QLineEdit denivele;
 
-    QLabel Perte;
-    QLabel Piezo;
-    QLabel Vitesse;
+    QLineEdit Perte;
+    QLineEdit Piezo;
+    QLineEdit Vitesse;
 
+    QPushButton Calcul;
+
+    void keyPressEvent(QKeyEvent *event);
+
+    void focusNextInput();
+
+    void focusPreviousInput();
+
+    void calculer();
 };
 
 

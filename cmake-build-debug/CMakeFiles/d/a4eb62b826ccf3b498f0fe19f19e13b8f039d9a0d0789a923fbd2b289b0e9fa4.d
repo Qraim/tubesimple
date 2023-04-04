@@ -123,6 +123,7 @@ tubesimple_autogen/timestamp: \
   /usr/include/c++/12.2.1/bits/hash_bytes.h \
   /usr/include/c++/12.2.1/bits/invoke.h \
   /usr/include/c++/12.2.1/bits/ios_base.h \
+  /usr/include/c++/12.2.1/bits/istream.tcc \
   /usr/include/c++/12.2.1/bits/iterator_concepts.h \
   /usr/include/c++/12.2.1/bits/list.tcc \
   /usr/include/c++/12.2.1/bits/locale_classes.h \
@@ -213,6 +214,8 @@ tubesimple_autogen/timestamp: \
   /usr/include/c++/12.2.1/initializer_list \
   /usr/include/c++/12.2.1/ios \
   /usr/include/c++/12.2.1/iosfwd \
+  /usr/include/c++/12.2.1/iostream \
+  /usr/include/c++/12.2.1/istream \
   /usr/include/c++/12.2.1/iterator \
   /usr/include/c++/12.2.1/limits \
   /usr/include/c++/12.2.1/list \
@@ -362,8 +365,10 @@ tubesimple_autogen/timestamp: \
   /usr/include/qt/QtWidgets/QApplication \
   /usr/include/qt/QtWidgets/QComboBox \
   /usr/include/qt/QtWidgets/QDesktopWidget \
+  /usr/include/qt/QtWidgets/QFormLayout \
   /usr/include/qt/QtWidgets/QHBoxLayout \
   /usr/include/qt/QtWidgets/QLabel \
+  /usr/include/qt/QtWidgets/QLayout \
   /usr/include/qt/QtWidgets/QLineEdit \
   /usr/include/qt/QtWidgets/QPushButton \
   /usr/include/qt/QtWidgets/QShortcut \
@@ -376,6 +381,7 @@ tubesimple_autogen/timestamp: \
   /usr/include/qt/QtWidgets/qboxlayout.h \
   /usr/include/qt/QtWidgets/qcombobox.h \
   /usr/include/qt/QtWidgets/qdesktopwidget.h \
+  /usr/include/qt/QtWidgets/qformlayout.h \
   /usr/include/qt/QtWidgets/qframe.h \
   /usr/include/qt/QtWidgets/qgridlayout.h \
   /usr/include/qt/QtWidgets/qlabel.h \

@@ -1,7 +1,13 @@
 #include <QApplication>
-#include <QPushButton>
-#include <iostream>
+#include "tubesimple.h"
 
-int main(int argc, char *argv[]) {
-    std::cout<<"hey"<<std::endl;
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+
+    tubesimple tubeWidget;
+    tubeWidget.setWindowTitle("Tube Simple");
+    tubeWidget.show();
+
+    return app.exec();
 }
