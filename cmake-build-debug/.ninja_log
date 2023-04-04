@@ -1,0 +1,9 @@
+# ninja log v5
+1	433	1680602001994000141	tubesimple_autogen/timestamp	e9d22c4408929d6f
+1	433	1680602001994000141	tubesimple_autogen/mocs_compilation.cpp	e9d22c4408929d6f
+1	433	1680602001994000141	/home/qraim/CLionProjects/tubesimple/cmake-build-debug/tubesimple_autogen/timestamp	e9d22c4408929d6f
+1	433	1680602001994000141	/home/qraim/CLionProjects/tubesimple/cmake-build-debug/tubesimple_autogen/mocs_compilation.cpp	e9d22c4408929d6f
+434	3196	1680602004754017885	CMakeFiles/tubesimple.dir/main.cpp.o	1b641dac2d61b091
+434	3407	1680602004970685946	CMakeFiles/tubesimple.dir/tubesimple_autogen/mocs_compilation.cpp.o	5b492a22c22846fb
+434	3517	1680602005080686654	CMakeFiles/tubesimple.dir/tubesimple.cpp.o	b7eecb1cbf4f4f4f
+3517	3970	1680602005530689550	tubesimple	622f32493f618dd3
