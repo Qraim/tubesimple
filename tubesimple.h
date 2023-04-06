@@ -18,6 +18,8 @@
 #include <QPixmap>
 #include <QDesktopWidget>
 #include <QFormLayout>
+#include <QDoubleValidator>
+#include <memory>
 
 #include <iostream>
 
@@ -29,7 +31,7 @@ public:
     tubesimple(QWidget *parent = nullptr);
 
 private:
-
+    ~tubesimple();
     QComboBox materiau;
 
     QLineEdit debit;
@@ -43,13 +45,17 @@ private:
 
     QPushButton Calcul;
 
-    void keyPressEvent(QKeyEvent *event);
+    void keyPressEvent(QKeyEvent *event) override;
 
     void focusNextInput();
 
     void focusPreviousInput();
 
     void calculer();
+
+    void checkInputs();
+
+    void clearresult();
 };
 
 

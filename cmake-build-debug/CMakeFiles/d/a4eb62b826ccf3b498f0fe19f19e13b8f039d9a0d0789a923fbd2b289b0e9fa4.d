@@ -327,6 +327,7 @@ tubesimple_autogen/timestamp: \
   /usr/include/qt/QtCore/qvarlengtharray.h \
   /usr/include/qt/QtCore/qvector.h \
   /usr/include/qt/QtCore/qversiontagging.h \
+  /usr/include/qt/QtGui/QDoubleValidator \
   /usr/include/qt/QtGui/QIcon \
   /usr/include/qt/QtGui/QKeyEvent \
   /usr/include/qt/QtGui/QPixmap \
