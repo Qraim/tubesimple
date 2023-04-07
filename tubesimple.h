@@ -28,10 +28,11 @@ class tubesimple : public QWidget {
 Q_OBJECT
 
 public:
+
     tubesimple(QWidget *parent = nullptr);
+    ~tubesimple();
 
 private:
-    ~tubesimple();
     QComboBox materiau;
 
     QLineEdit debit;
@@ -45,17 +46,38 @@ private:
 
     QPushButton Calcul;
 
+    ///
+    /// @brief Gère l'événement de pression de touche du clavier
+    ///
+    /// @param event : Événement de pression de touche
+    ///
     void keyPressEvent(QKeyEvent *event) override;
 
+    ///
+    /// @brief Change le champ actif pour le champ suivant
+    ///
     void focusNextInput();
 
+    ///
+    /// @brief Change le champ actif pour le champ précédent
+    ///
     void focusPreviousInput();
 
+    ///
+    /// @brief Calculer les résultats et les afficher dans le tableau
+    ///
     void calculer();
 
+    ///
+    /// @brief Vérifier que tous les champs de saisie sont remplis
+    ///
     void checkInputs();
 
+    ///
+    /// @brief Effacer les résultats dans le tableau
+    ///
     void clearresult();
+
 };
 
 

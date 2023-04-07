@@ -13,7 +13,7 @@ tubesimple::tubesimple(QWidget *parent) : QWidget(parent)
     materiau.addItem("Aluminium");
 
 
-    // Create grid layout
+    // Créé la grille
     QGridLayout *gridLayout = new QGridLayout;
 
     QLabel *titleLabel = new QLabel("Perte de charge en tube simple", this);
@@ -25,7 +25,7 @@ tubesimple::tubesimple(QWidget *parent) : QWidget(parent)
     gridLayout->setColumnStretch(3, 1);
     gridLayout->setColumnStretch(4, 1);
 
-    // Add elements to grid layout
+    // On ajoute les éléments à leur place dans la grille
     gridLayout->addWidget(new QLabel("Materiau", this), 1, 0);
     gridLayout->addWidget(&materiau, 2, 0);
     gridLayout->addWidget(new QLabel("Debit (m3/h)", this), 1, 1);
@@ -41,7 +41,7 @@ tubesimple::tubesimple(QWidget *parent) : QWidget(parent)
     denivele.setFixedWidth(110);
     gridLayout->addWidget(&denivele, 2, 4);
 
-    // Set up the bottom row of result labels
+    // La derniere ligne pour les résultats
     QHBoxLayout *resultLabelsLayout = new QHBoxLayout;
     QLabel *perteLabel = new QLabel("Pertes de charge (m)", this);
     QLabel *piezoLabel = new QLabel("Variation Piezo (m)", this);
@@ -50,7 +50,7 @@ tubesimple::tubesimple(QWidget *parent) : QWidget(parent)
     resultLabelsLayout->addWidget(piezoLabel);
     resultLabelsLayout->addWidget(vitesseLabel);
 
-    // Set up the bottom row of result fields
+
     QHBoxLayout *resultFieldsLayout = new QHBoxLayout;
     Perte.setReadOnly(true);
     Piezo.setReadOnly(true);
@@ -59,29 +59,27 @@ tubesimple::tubesimple(QWidget *parent) : QWidget(parent)
     resultFieldsLayout->addWidget(&Piezo);
     resultFieldsLayout->addWidget(&Vitesse);
 
-    // Add non-editable fields to the layout
+    // Ajoute des champs non écrivable
     QHBoxLayout *nonEditableFieldsLayout = new QHBoxLayout;
 
-    // Add the "Calculer" button
+    // Ajoute le bouton Calculer
     Calcul.setText("Calculer");
     QHBoxLayout *calculerLayout = new QHBoxLayout;
     Calcul.setFixedSize(120, 30);
-    calculerLayout->addStretch(1); // Add a stretcher to the left of the button
+    calculerLayout->addStretch(1);
     calculerLayout->addWidget(&Calcul);
-    calculerLayout->addStretch(1); // Add a stretcher to the right of the button
-
-
+    calculerLayout->addStretch(1);
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addLayout(gridLayout);
-    mainLayout->addSpacing(10); // Add a vertical space of 10 pixels
+    mainLayout->addSpacing(10);
     mainLayout->addLayout(calculerLayout);
-    mainLayout->addSpacing(10); // Add a vertical space of 10 pixels
+    mainLayout->addSpacing(10);
     mainLayout->addLayout(resultLabelsLayout);
     mainLayout->addLayout(resultFieldsLayout);
 
 
-    // Set the main layout for this widget
+    // Fixe l'interface globale
     setLayout(mainLayout);
 
     Calcul.setDisabled(true);
@@ -92,6 +90,8 @@ tubesimple::tubesimple(QWidget *parent) : QWidget(parent)
     connect(&diametre, &QLineEdit::textChanged, this, &tubesimple::checkInputs);
     connect(&longueur, &QLineEdit::textChanged, this, &tubesimple::checkInputs);
     connect(&denivele, &QLineEdit::textChanged, this, &tubesimple::checkInputs);
+    connect(&materiau, &QComboBox::currentTextChanged, this, &tubesimple::checkInputs);
+
 
     QDoubleValidator *debitValidator = new QDoubleValidator(0.01, 1000000, 2, this);
     debit.setValidator(debitValidator);
@@ -117,26 +117,36 @@ tubesimple::~tubesimple() {
 
 void tubesimple::keyPressEvent(QKeyEvent *event) {
 
+    // Si la touche "Entrée" est appuyée
     if(event->key() == Qt::Key_Return){
+
+        // Si le bouton Calcul est actif, on clique dessus
         if(Calcul.isEnabled()){
             Calcul.click();
-        } else {
+        }
+            // Sinon, on passe à l'input suivant
+        else {
             focusNextInput();
         }
-    } else if (event->key() == Qt::Key_Control) {
+    }
+        // Si la touche "Ctrl" est appuyée, on passe à l'input précédent
+    else if (event->key() == Qt::Key_Control) {
         focusPreviousInput();
         return;
-    } else if (event->key() == Qt::Key_Tab) {
+    }
+        // Si la touche "Tab" est appuyée, on passe à l'input suivant
+    else if (event->key() == Qt::Key_Tab) {
         focusNextInput();
-        event->accept(); // Prevent the default tab behavior
         return;
-    } else if (event->modifiers() & Qt::Key_Return) {
-        if (Calcul.isEnabled()) { // Si calcul est actif
+    }
+        // Si la touche "Entrée" avec le modificateur est appuyée
+    else if (event->modifiers() & Qt::Key_Return) {
+
+        // Si le bouton Calcul est actif, on calcule les résultats
+        if (Calcul.isEnabled()) {
             calculer();
             return;
         }
-    } else {
-        QWidget::keyPressEvent(event);
     }
 }
 
@@ -171,27 +181,28 @@ void tubesimple::focusNextInput() {
 
 void tubesimple::calculer() {
 
-    float D = debit.text().toFloat();
-    float Dia = diametre.text().toFloat();
-    float L = longueur.text().toFloat();
+    float D = debit.text().toFloat(); // Récupère la valeur de debit de la QLineEdit et la convertit en float
+    float Dia = diametre.text().toFloat(); // Récupère la valeur de diametre de la QLineEdit et la convertit en float
+    float L = longueur.text().toFloat(); // Récupère la valeur de longueur de la QLineEdit et la convertit en float
     float deniveles = 0;
     float  k =0;
     float a=0;
     float b = 0 ;
 
-
+    // Si l'input de dénivelé n'est pas vide, on le convertit en float et on le stocke dans la variable deniveles
     if(!denivele.text().isEmpty()){
         deniveles = denivele.text().toFloat();
     }
 
-    float flowRate = D / 3600; // Convert m³/h to m³/s
-    float pipeDiameter = Dia / 1000; // Convert mm to m
+    float flowRate = D / 3600; // Convertit m³/h en m³/s
+    float pipeDiameter = Dia / 1000; // Convertit mm en m
 
-    float pipeArea = M_PI * pow(pipeDiameter / 2, 2);
-    float v = flowRate / pipeArea;
+    float pipeArea = M_PI * pow(pipeDiameter / 2, 2); // Calcule l'aire de la section transversale du tuyau en m²
+    float v = flowRate / pipeArea; // Calcule la vitesse d'écoulement en m/s
 
-    QString material = materiau.currentText();
+    QString material = materiau.currentText(); // Récupère la valeur sélectionnée dans la liste déroulante "materiau"
 
+    // Assigner les valeurs de k, a et b selon le matériau choisi
     if (material == "PVC" || material == "Polyéthylène") {
         k=831743.11;
         a = 1.75;
@@ -206,41 +217,46 @@ void tubesimple::calculer() {
         b=-4.87;
     }
 
-    float pertecharge = k*pow((D*1000/3600),a)*pow((Dia),b)*L;
+    float pertecharge = k*pow((D*1000/3600),a)*pow((Dia),b)*L; // Calcule la perte de charge en Pa
 
-    float variation = pertecharge+deniveles;
+    float variation = pertecharge+deniveles; // Calcule la variation de charge en Pa
 
-    Perte.setText(QString::number(pertecharge, 'f', 2));
-    Piezo.setText(QString::number(variation, 'f', 2));
+    Perte.setText(QString::number(pertecharge, 'f', 2)); // Met à jour le texte de la QLineEdit "Perte"
+    Piezo.setText(QString::number(variation, 'f', 2)); // Met à jour le texte de la QLineEdit "Piezo"
 
     QString str = "";
-    if (v > 2) {
+    if (v > 2) { // Si la vitesse d'écoulement est supérieure à 2 m/s, on change la couleur de la QLineEdit "Vitesse" en rouge
         Vitesse.setStyleSheet("color: red;  background-color: white ");
         str = QString::number(v, 'f', 2);
-    } else {
+    } else { // Sinon, on enlève la couleur rouge
         Vitesse.setStyleSheet("");
         str = QString::number(v, 'f', 2);
     }
 
-    Vitesse.setText(str);
+    Vitesse.setText(str); // Met à jour le texte de la QLineEdit "Vitesse"
 }
 
 
 
+// Cette fonction permet de vérifier que les champs d'entrée sont correctement remplis
 void tubesimple::checkInputs() {
 
+    // On réinitialise la couleur des champs d'entrée
     debit.setStyleSheet("");
     diametre.setStyleSheet("");
     longueur.setStyleSheet("");
 
+    // On récupère les valeurs des champs d'entrée
     float D = debit.text().toFloat();
     float Dia = diametre.text().toFloat();
     float L = longueur.text().toFloat();
 
+    // On vérifie si les valeurs des champs d'entrée sont correctes
     bool deb = D<=0;
     bool diam = Dia<=0;
     bool Long = L<=0;
 
+    // Si les valeurs ne sont pas correctes, on met la couleur de fond en rouge
     if(deb)
     {
         debit.setStyleSheet("color: red;  background-color: white ");
@@ -254,13 +270,15 @@ void tubesimple::checkInputs() {
         longueur.setStyleSheet("color: red;  background-color: white ");
     }
 
+    // On vérifie si tous les champs sont remplis
     if (debit.text().isEmpty() || diametre.text().isEmpty() || longueur.text().isEmpty() ) {
-        clearresult();
-        Calcul.setDisabled(true);
+        clearresult(); // On efface les résultats précédents
+        Calcul.setDisabled(true); // On désactive le bouton de calcul
         return;
     } else if(!deb && !diam && !Long){
-        Calcul.setDisabled(false);
+        Calcul.setDisabled(false); // On active le bouton de calcul
     }
+
 }
 
 void tubesimple::clearresult(){
